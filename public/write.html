@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Write a Story — OpenVerse</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><path d=%22M20 2 L36 11 V29 L20 38 L4 29 V11 Z%22 fill=%22%238b5cf6%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/animations.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<section class="page-hero" style="padding-bottom:20px">
+  <div class="hero-bg"></div>
+  <div class="container" style="position:relative;z-index:1">
+    <span class="section-eyebrow" style="justify-content:center;display:flex">✏️ Write</span>
+    <h1 id="writePageTitle">Write a Story</h1>
+    <p id="writePageSub">Share something worth reading. Every field marked required helps readers find your story.</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container form-page">
+    <form class="glass form-card" id="writeForm" novalidate>
+
+      <div class="form-group">
+        <label for="fieldTitle">Title *</label>
+        <input type="text" id="fieldTitle" placeholder="A headline worth clicking on" required>
+        <div class="form-error">Title is required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="fieldSubtitle">Subtitle</label>
+        <input type="text" id="fieldSubtitle" placeholder="One sentence that expands on your title">
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fieldAuthorDisplay">Author</label>
+          <div class="glass" id="authorDisplay" style="padding:.7rem 1rem;border-radius:var(--radius-sm);display:flex;align-items:center;gap:.7rem;border:1px solid var(--border)">
+            <img id="authorDisplayAvatar" class="avatar avatar-sm" src="" alt="" width="28" height="28">
+            <span id="authorDisplayName" style="font-weight:600;font-size:.92rem"></span>
+          </div>
+          <input type="hidden" id="fieldAuthor">
+          <div class="form-help" id="authorHelp">Stories you publish are automatically attributed to your author profile.</div>
+        </div>
+        <div class="form-group">
+          <label for="fieldCategory">Category *</label>
+          <select id="fieldCategory" required><option value="">Loading categories...</option></select>
+          <div class="form-error">Please choose a category</div>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fieldReadingTime">Reading time (minutes)</label>
+          <input type="number" id="fieldReadingTime" min="1" max="60" placeholder="Auto-calculated if left blank">
+        </div>
+        <div class="form-group">
+          <label for="fieldTags">Tags <span style="color:var(--text-faint);font-weight:400">(comma separated)</span></label>
+          <input type="text" id="fieldTags" placeholder="AI, Productivity, Design">
+          <div class="tag-input-preview" id="tagPreview"></div>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="fieldImage">Cover image URL</label>
+        <input type="url" id="fieldImage" placeholder="https://images.example.com/cover.jpg">
+        <div class="form-help">Leave blank to auto-generate a placeholder cover.</div>
+        <div class="image-preview" id="imagePreview"><img src="" alt="Cover preview"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="fieldExcerpt">Excerpt</label>
+        <textarea id="fieldExcerpt" rows="2" placeholder="A short teaser shown on story cards (auto-generated if left blank)"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="fieldContent">Story content *</label>
+        <textarea id="fieldContent" rows="14" placeholder="Write your story here. Separate paragraphs with a blank line." required></textarea>
+        <div class="form-error">Story content is required</div>
+        <div class="form-help">Tip: leave a blank line between paragraphs for proper formatting.</div>
+      </div>
+
+      <div class="form-actions">
+        <button type="button" class="btn btn-danger" id="deleteBtn" style="display:none;margin-right:auto">Delete Story</button>
+        <button type="button" class="btn btn-ghost" id="cancelBtn">Cancel</button>
+        <button type="button" class="btn btn-ghost" id="draftBtn">Save Draft</button>
+        <button type="submit" class="btn btn-primary" id="publishBtn">Publish Story</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="/js/main.js"></script>
+<script src="/js/write.js"></script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" width="800" height="520" role="img">
+  <defs>
+    <linearGradient id="bg-cat12" x1="0" y1="0" x2="800" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0a0a16"/>
+      <stop offset="0.55" stop-color="#120c24"/>
+      <stop offset="1" stop-color="#0a0a16"/>
+    </linearGradient>
+    <linearGradient id="accent-cat12" x1="0" y1="0" x2="800" y2="520" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7e22ce"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <radialGradient id="glow-cat12" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#7e22ce" stop-opacity="0.9"/>
+      <stop offset="1" stop-color="#7e22ce" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid-cat12" width="42" height="42" patternUnits="userSpaceOnUse">
+      <path d="M42 0H0V42" fill="none" stroke="#ffffff" stroke-opacity="0.045"/>
+    </pattern>
+  </defs>
+  <rect width="800" height="520" fill="url(#bg-cat12)"/>
+  <rect width="800" height="520" fill="url(#grid-cat12)"/>
+  <circle cx="310" cy="337" r="122" fill="url(#glow-cat12)" opacity="0.22"/><circle cx="441" cy="287" r="145" fill="url(#glow-cat12)" opacity="0.12"/><circle cx="449" cy="465" r="103" fill="url(#glow-cat12)" opacity="0.17"/><circle cx="248" cy="353" r="126" fill="url(#glow-cat12)" opacity="0.16"/>
+  <rect x="114" y="416" width="9" height="9" rx="3" fill="#c4b5fd" opacity="0.07" transform="rotate(218 114 416)"/><rect x="242" y="9" width="17" height="17" rx="3" fill="#c4b5fd" opacity="0.09" transform="rotate(285 242 9)"/><rect x="770" y="509" width="9" height="9" rx="3" fill="#c4b5fd" opacity="0.08" transform="rotate(226 770 509)"/><rect x="396" y="487" width="17" height="17" rx="3" fill="#c4b5fd" opacity="0.13" transform="rotate(205 396 487)"/><rect x="659" y="463" width="20" height="20" rx="3" fill="#c4b5fd" opacity="0.08" transform="rotate(219 659 463)"/><rect x="59" y="305" width="10" height="10" rx="3" fill="#c4b5fd" opacity="0.11" transform="rotate(103 59 305)"/>
+  <rect width="800" height="520" fill="none" stroke="url(#accent-cat12)" stroke-opacity="0.35" stroke-width="2"/>
+  <circle cx="400.0" cy="291.20000000000005" r="156.0" fill="url(#accent-cat12)" opacity="0.10"/>
+  <text x="400.0" y="338.00000000000006" font-size="176" text-anchor="middle" opacity="0.85">🎯</text>
+  <rect width="800" height="520" fill="url(#bg-cat12)" opacity="0.02"/>
+</svg>

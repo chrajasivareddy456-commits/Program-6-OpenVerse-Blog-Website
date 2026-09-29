@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — OpenVerse</title>
+<meta name="description" content="Learn about OpenVerse's mission to give every voice a verse.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><path d=%22M20 2 L36 11 V29 L20 38 L4 29 V11 Z%22 fill=%22%238b5cf6%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/animations.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<section class="page-hero">
+  <div class="hero-bg"></div>
+  <div class="container" style="position:relative;z-index:1;max-width:720px">
+    <span class="section-eyebrow" style="justify-content:center;display:flex">✦ About OpenVerse</span>
+    <h1>A place built for people who still read all the way to the end.</h1>
+    <p>OpenVerse started as a simple question: what would publishing look like if it optimized for understanding instead of attention?</p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="container" style="max-width:760px">
+    <div class="stagger">
+      <p class="reveal" style="font-size:1.1rem;color:#dcd9ea">Every major platform before us was eventually shaped by the same pressure: keep people scrolling. Headlines got sharper, articles got shorter, and the space for a genuinely long, careful idea kept shrinking. OpenVerse exists because we think that trade was a mistake.</p>
+      <p class="reveal" style="font-size:1.1rem;color:#dcd9ea">We built a platform where a writer's only job is to say something worth saying, and a reader's only job is to actually read it. No infinite feed engineered to keep you swiping past the piece you just clicked. No paywall dividing curious readers from the writers trying to reach them.</p>
+    </div>
+
+    <hr class="divider">
+
+    <div class="feature-grid stagger" style="grid-template-columns:repeat(3,1fr)">
+      <div class="feature-card reveal">
+        <div class="feature-icon">🎯</div>
+        <h3>Our Mission</h3>
+        <p>Give every writer, regardless of platform or following, a fair shot at being read by someone who actually cares.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🔭</div>
+        <h3>Our Vision</h3>
+        <p>A web where thoughtful writing is discoverable on its own merit, not buried under whatever performs best in a feed.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌱</div>
+        <h3>Our Philosophy</h3>
+        <p>Depth over volume. We'd rather host one story someone finishes than ten someone scrolls past.</p>
+      </div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-head">
+      <div><span class="section-eyebrow">📊 By the Numbers</span><h2>Growing, one story at a time</h2></div>
+    </div>
+    <div class="hero-stats" style="justify-content:space-between;flex-wrap:wrap;gap:2rem;margin-bottom:3rem">
+      <div><div class="stat-num" data-counter="10" data-suffix="K+">0</div><div class="stat-label">Stories Published</div></div>
+      <div><div class="stat-num" data-counter="5" data-suffix="K+">0</div><div class="stat-label">Active Writers</div></div>
+      <div><div class="stat-num" data-counter="100" data-suffix="K+">0</div><div class="stat-label">Monthly Readers</div></div>
+      <div><div class="stat-num" data-counter="50" data-suffix="+">0</div><div class="stat-label">Categories</div></div>
+    </div>
+
+    <hr class="divider">
+
+    <div class="section-head">
+      <div><span class="section-eyebrow">💎 Our Values</span><h2>What we optimize for</h2></div>
+    </div>
+    <div class="why-grid stagger" style="margin-bottom:3rem">
+      <div class="why-card reveal"><div class="num">Community</div><h3>Readers and writers, not users and content</h3><p>We think about the people on both ends of every story, not metrics in between.</p></div>
+      <div class="why-card reveal"><div class="num">Openness</div><h3>Every voice, seriously considered</h3><p>A first-time writer's honest piece deserves the same visibility as an established byline.</p></div>
+      <div class="why-card reveal"><div class="num">Craft</div><h3>Built like a tool, not a trap</h3><p>Fast, distraction-free, and designed to get out of the way of good writing.</p></div>
+    </div>
+
+    <div class="cta-band reveal">
+      <h2>Ready to add your verse?</h2>
+      <p>Whether you're here to read or to write, there's a place for you on OpenVerse.</p>
+      <a href="/write" class="btn btn-primary">Start Writing</a>
+    </div>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="/js/main.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  OV.renderNavbar('about');
+  OV.renderFooter();
+  OV.initScrollReveal();
+  OV.animateCounters();
+});
+</script>
+</body>
+</html>

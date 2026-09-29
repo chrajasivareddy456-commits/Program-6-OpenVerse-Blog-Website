@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign In — OpenVerse</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><path d=%22M20 2 L36 11 V29 L20 38 L4 29 V11 Z%22 fill=%22%238b5cf6%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/animations.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<div class="auth-wrap">
+  <div class="hero-bg"></div>
+  <div class="glass auth-card" style="position:relative;z-index:1">
+    <h1>Welcome back</h1>
+    <p class="sub">Sign in to continue writing and reading on OpenVerse.</p>
+    <form class="auth-form" id="signinForm">
+      <div class="form-group" style="margin:0">
+        <label for="siEmail">Email</label>
+        <input type="email" id="siEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group" style="margin:0">
+        <label for="siPassword">Password</label>
+        <input type="password" id="siPassword" placeholder="••••••••" required minlength="4">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+    </form>
+    <div class="auth-note">
+      This is a demo login: credentials are checked against a real (hashed, salted) password stored in <code>data/users.json</code> via <code>POST /api/auth/login</code> — it just isn't production-grade auth (no sessions/JWT, no HTTPS enforcement).
+      <div style="margin-top:.7rem;padding-top:.7rem;border-top:1px solid var(--border)">
+        <strong style="color:var(--text)">Try the demo account:</strong><br>
+        raja@openverse.com / Raja@123
+        <button type="button" class="btn btn-ghost btn-sm" id="fillDemoBtn" style="display:block;margin-top:.6rem;width:100%">Fill Demo Credentials</button>
+      </div>
+    </div>
+    <div class="auth-switch">Don't have an account? <a href="/signup">Sign up</a></div>
+  </div>
+</div>
+
+<div id="footer-root" style="display:none"></div>
+
+<script src="/js/main.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

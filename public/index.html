@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OpenVerse — Where Every Voice Has a Verse</title>
+<meta name="description" content="Discover meaningful stories, fresh perspectives and ideas from a community of curious minds on OpenVerse.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><path d=%22M20 2 L36 11 V29 L20 38 L4 29 V11 Z%22 fill=%22%238b5cf6%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/animations.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<!-- ===================== HERO ===================== -->
+<header class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="particles" id="heroParticles"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="hero-eyebrow">✦ Welcome to OpenVerse</span>
+      <h1>Where Every<br>Voice Has a <span class="grad">Verse.</span></h1>
+      <p class="hero-sub">Discover meaningful stories, fresh perspectives and ideas from a community of curious minds.</p>
+      <div class="hero-cta">
+        <a href="/explore" class="btn btn-primary">Explore Stories <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="/write" class="btn btn-ghost">✏️ Start Writing</a>
+      </div>
+      <div class="hero-stats">
+        <div><div class="stat-num" data-counter="10" data-suffix="K+">0</div><div class="stat-label">Stories</div></div>
+        <div><div class="stat-num" data-counter="5" data-suffix="K+">0</div><div class="stat-label">Writers</div></div>
+        <div><div class="stat-num" data-counter="50" data-suffix="+">0</div><div class="stat-label">Categories</div></div>
+        <div><div class="stat-num" data-counter="100" data-suffix="K+">0</div><div class="stat-label">Readers</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="book-scene">
+        <div class="planet"></div>
+        <div class="shard s1"></div>
+        <div class="shard s2"></div>
+        <div class="glass book-card c1">Ideas ✦</div>
+        <div class="glass book-card c2">Stories ✦</div>
+        <div class="glass book-card c3">People ✦</div>
+        <div class="book">
+          <div class="book-glow"></div>
+          <div class="book-spine"></div>
+          <div class="book-page left"></div>
+          <div class="book-page right"></div>
+        </div>
+      </div>
+      <div class="scroll-cue"><span class="scroll-dot">↓</span> Scroll to explore</div>
+    </div>
+  </div>
+</header>
+
+<!-- ===================== FEATURE HIGHLIGHTS ===================== -->
+<section class="section-tight">
+  <div class="container">
+    <div class="feature-grid stagger">
+      <div class="feature-card reveal">
+        <div class="feature-icon">✍️</div>
+        <h3>Write Freely</h3>
+        <p>Share your thoughts with the world, no gatekeepers, no algorithms deciding if your voice matters.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🌐</div>
+        <h3>Join a Community</h3>
+        <p>Connect with like-minded readers and writers who care about ideas as much as you do.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">💡</div>
+        <h3>Discover Ideas</h3>
+        <p>Explore diverse topics and perspectives from a global community of curious minds.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">🚀</div>
+        <h3>Make an Impact</h3>
+        <p>Your words can inspire someone today. Every story published here can change a mind.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TRENDING ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">🔥 Trending Stories</span>
+        <h2>Handpicked stories from our community</h2>
+      </div>
+      <a href="/explore?filter=trending" class="link-arrow">View All →</a>
+    </div>
+    <div class="post-grid stagger" id="trendingGrid">
+      <div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FEATURED STORY ===================== -->
+<section class="section-tight">
+  <div class="container" id="featuredWrap"></div>
+</section>
+
+<!-- ===================== LATEST ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">📰 Latest Stories</span>
+        <h2>Fresh off the page</h2>
+      </div>
+      <a href="/explore?sort=latest" class="link-arrow">View All →</a>
+    </div>
+    <div class="post-grid stagger" id="latestGrid">
+      <div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>
+      <div class="skeleton skeleton-card"></div><div class="skeleton skeleton-card"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CATEGORIES ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">🗂️ Browse by Category</span>
+        <h2>Explore stories from a variety of topics</h2>
+      </div>
+      <a href="/categories" class="link-arrow">View All Categories →</a>
+    </div>
+    <div class="category-grid stagger" id="categoryGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== AUTHORS ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">🖋️ Featured Authors</span>
+        <h2>Meet the voices behind the stories</h2>
+      </div>
+      <a href="/authors" class="link-arrow">View All Authors →</a>
+    </div>
+    <div class="author-grid stagger" id="authorGrid"></div>
+  </div>
+</section>
+
+<!-- ===================== WHY OPENVERSE ===================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-head">
+      <div>
+        <span class="section-eyebrow">⭐ Why OpenVerse</span>
+        <h2>Built for people who take ideas seriously</h2>
+      </div>
+    </div>
+    <div class="why-grid stagger">
+      <div class="why-card reveal"><div class="num">Independent</div><h3>No algorithm gatekeeping</h3><p>Your best writing gets seen because readers found it valuable, not because it gamed a feed.</p></div>
+      <div class="why-card reveal"><div class="num">Focused</div><h3>Reading, not scrolling</h3><p>A calm, distraction-free reading experience designed for stories that deserve your full attention.</p></div>
+      <div class="why-card reveal"><div class="num">Open</div><h3>Every voice welcome</h3><p>From first-time writers to seasoned experts, OpenVerse is built to amplify perspectives, not filter them.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== COMMUNITY CTA ===================== -->
+<section class="section-tight">
+  <div class="container">
+    <div class="cta-band reveal">
+      <h2>Your story matters.</h2>
+      <p>Share your ideas with the world. It takes two minutes to publish your first piece on OpenVerse.</p>
+      <a href="/write" class="btn btn-primary">Start Writing</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== NEWSLETTER ===================== -->
+<section class="section-tight">
+  <div class="container text-center">
+    <span class="section-eyebrow">✉️ Newsletter</span>
+    <h2 style="margin-bottom:.6rem">Stay in the loop.</h2>
+    <p style="max-width:480px;margin:0 auto 2rem">Get the best stories, ideas and insights delivered straight to your inbox, once a week, no spam.</p>
+    <form class="newsletter-box" id="newsletterForm">
+      <input type="email" placeholder="you@example.com" required aria-label="Email address">
+      <button type="submit" class="btn btn-primary">Subscribe</button>
+    </form>
+  </div>
+</section>
+
+<div id="footer-root"></div>
+
+<script src="/js/main.js"></script>
+<script src="/js/home.js"></script>
+</body>
+</html>

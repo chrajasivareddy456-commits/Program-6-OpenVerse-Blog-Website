@@ -1,0 +1,23 @@
+{
+  "name": "openverse-blog-application",
+  "version": "1.0.0",
+  "description": "OpenVerse — A premium blog management application built with Node.js, Express, and vanilla JavaScript.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": ["blog", "express", "nodejs", "openverse"],
+  "author": "OpenVerse",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.19.2",
+    "helmet": "^7.1.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

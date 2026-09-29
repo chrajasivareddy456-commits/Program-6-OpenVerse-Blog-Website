@@ -1,0 +1,472 @@
+import json, os, math
+
+OUT = os.path.join(os.path.dirname(__file__), "..", "data")
+os.makedirs(OUT, exist_ok=True)
+
+# ---------- AUTHORS ----------
+authors_raw = [
+    ("Aarav Mehta", "aarav-mehta", "Senior software engineer turned technical writer. Aarav spends his nights reverse-engineering how large systems fail so mornings can be calmer.", ["Technology", "Programming"], 42, "https://i.pravatar.cc/300?img=12"),
+    ("Priya Sharma", "priya-sharma", "Productivity researcher and former project manager. Priya writes about the unglamorous habits that quietly compound into a better life.", ["Productivity", "Self Improvement"], 37, "https://i.pravatar.cc/300?img=47"),
+    ("Rohan Verma", "rohan-verma", "Travel photographer who has crossed 40 countries with a single carry-on. Rohan believes the best stories are found off the itinerary.", ["Travel", "Lifestyle"], 29, "https://i.pravatar.cc/300?img=33"),
+    ("Isha Kapoor", "isha-kapoor", "Astrophysicist by training, storyteller by instinct. Isha translates dense research papers into ideas anyone can get lost in.", ["Science", "Education"], 25, "https://i.pravatar.cc/300?img=45"),
+    ("Devansh Rao", "devansh-rao", "Machine learning engineer building recommendation systems by day. Devansh writes to make AI feel less like magic and more like mechanics.", ["Artificial Intelligence", "Technology"], 33, "https://i.pravatar.cc/300?img=51"),
+    ("Meera Nair", "meera-nair", "UX designer and design systems lead. Meera is obsessed with the tiny details that make digital products feel human.", ["Design", "Business"], 31, "https://i.pravatar.cc/300?img=26"),
+    ("Kabir Anand", "kabir-anand", "Founder of two failed startups and one that's still standing. Kabir writes candidly about building things people actually want.", ["Business", "Productivity"], 19, "https://i.pravatar.cc/300?img=14"),
+    ("Ananya Iyer", "ananya-iyer", "Registered dietitian and long-distance runner. Ananya writes evidence-based health content without the fad-diet noise.", ["Health", "Food"], 28, "https://i.pravatar.cc/300?img=48"),
+    ("Vikram Singh", "vikram-singh", "Chef turned food writer documenting regional cuisines before they disappear from home kitchens. Vikram cooks first, writes second.", ["Food", "Culture"], 22, "https://i.pravatar.cc/300?img=15"),
+    ("Sana Qureshi", "sana-qureshi", "Art historian and museum curator. Sana writes about the ideas hiding inside paintings, buildings, and everyday objects.", ["Art & Culture", "Design"], 24, "https://i.pravatar.cc/300?img=32"),
+    ("Ch Raja Siva Reddy", "ch-raja-siva-reddy", "Technology enthusiast and aspiring software developer, writing about the tools, ideas, and small projects shaping how the next generation builds software.", ["Technology", "Programming"], 0, "https://i.pravatar.cc/300?img=60"),
+]
+
+authors = []
+for i, (name, slug, bio, expertise, followers, avatar) in enumerate(authors_raw, start=1):
+    authors.append({
+        "id": f"auth-{i:02d}",
+        "slug": slug,
+        "name": name,
+        "avatar": avatar,
+        "bio": bio,
+        "expertise": expertise,
+        "articleCount": 0,  # filled in after posts are generated
+        "followers": followers * 143,
+        "social": {
+            "twitter": f"https://twitter.com/{slug.replace('-','')}",
+            "linkedin": f"https://linkedin.com/in/{slug}",
+            "website": f"https://{slug}.dev"
+        },
+        "joined": "2022-03-01"
+    })
+
+with open(os.path.join(OUT, "authors.json"), "w") as f:
+    json.dump(authors, f, indent=2)
+
+# ---------- CATEGORIES ----------
+categories_raw = [
+    ("Technology", "technology", "General technology trends, hardware, and the tools shaping how we work and live.", "💻"),
+    ("Artificial Intelligence", "artificial-intelligence", "Machine learning, neural networks, and the systems learning to think alongside us.", "🤖"),
+    ("Programming", "programming", "Languages, frameworks, and the craft of writing software that lasts.", "🧑‍💻"),
+    ("Science", "science", "Physics, space, biology, and the questions that keep researchers up at night.", "🔭"),
+    ("Education", "education", "How people learn, teach, and build skills in a world that keeps changing.", "🎓"),
+    ("Business", "business", "Startups, strategy, and the decisions behind the companies we use every day.", "📈"),
+    ("Productivity", "productivity", "Systems, habits, and tools for getting meaningful work done.", "⚡"),
+    ("Lifestyle", "lifestyle", "Everyday living, routines, and the small choices that shape a good life.", "🌿"),
+    ("Travel", "travel", "Journeys, places, and the perspective shift that comes from leaving home.", "🧭"),
+    ("Health", "health", "Evidence-based fitness, nutrition, and mental wellbeing.", "❤️"),
+    ("Food", "food", "Recipes, cuisines, and the culture simmering behind every dish.", "🍲"),
+    ("Art & Culture", "art-culture", "Art, history, and the stories humans have always told each other.", "🎨"),
+    ("Design", "design", "Visual design, product design, and the craft of making things usable.", "🎯"),
+    ("Self Improvement", "self-improvement", "Mindset, growth, and the long game of becoming who you want to be.", "🌱"),
+]
+
+categories = []
+for i, (name, slug, desc, icon) in enumerate(categories_raw, start=1):
+    categories.append({
+        "id": f"cat-{i:02d}",
+        "name": name,
+        "slug": slug,
+        "description": desc,
+        "icon": icon,
+        "postCount": 0
+    })
+
+# ---------- POSTS ----------
+# Each entry: title, subtitle, category slug, author slug, tags, featured, trending, body paragraphs
+post_defs = [
+    dict(title="The Future of Artificial Intelligence: Friend or Foe?",
+         subtitle="Why the next decade of AI will be decided by trust, not just capability.",
+         category="artificial-intelligence", author="devansh-rao",
+         tags=["AI", "Future", "Ethics"], featured=True, trending=True,
+         excerpt="Exploring how artificial intelligence is reshaping our world, and why the biggest risk isn't the technology itself but how carelessly we deploy it.",
+         body=[
+             "Every generation gets one technology that forces it to redefine what work, creativity, and intelligence actually mean. For us, that technology is AI. It is tempting to frame the conversation as a binary: either machines will liberate us from drudgery, or they will quietly replace us. The truth, as usual, is messier and more interesting.",
+             "Modern AI systems are pattern-recognition engines trained on staggering amounts of human-generated data. They are extraordinarily good at interpolating between examples they have seen, and increasingly good at tasks that once required years of specialized training. What they are not is conscious, intentional, or accountable. That distinction matters more than most headlines suggest.",
+             "The organizations that will benefit most from AI are not the ones racing to automate the most jobs, but the ones treating it as a collaborator that amplifies judgment rather than replaces it. A radiologist paired with an AI model that flags anomalies catches more tumors than either the doctor or the model alone. That pattern, human plus machine outperforming either in isolation, shows up again and again once you look for it.",
+             "None of this means the disruption is small. Entire categories of routine cognitive work will shrink. But history shows that technologies which eliminate tasks rarely eliminate professions outright, they redefine them. The printing press didn't end writing, it multiplied it. The real question worth asking isn't whether AI will change your field, it already has. It's whether the systems being built are transparent enough, and accountable enough, for us to trust the judgment calls they increasingly make on our behalf.",
+             "Friend or foe is the wrong frame. AI is a mirror and a multiplier. It reflects the priorities of whoever trains it, and it multiplies whatever those priorities are, good or bad, at a scale no previous tool could match. That's not a reason for fatalism. It's a reason to pay very close attention to who is doing the training, and why."
+         ]),
+    dict(title="Why APIs Matter in Modern Software",
+         subtitle="The invisible contracts that hold the internet together.",
+         category="programming", author="aarav-mehta",
+         tags=["APIs", "Backend", "Software Design"], featured=False, trending=False,
+         excerpt="APIs are the quiet infrastructure behind nearly every app you use. Here's why designing them well is one of the highest-leverage skills in software.",
+         body=[
+             "Open any app on your phone and, within a few taps, you're almost certainly talking to an API. A weather app calling a meteorological service. A ride-share app requesting your driver's location every few seconds. A checkout page verifying your card with a payment processor. None of this coordination is visible, and that invisibility is exactly the point.",
+             "A good API is a promise. It says: send me data shaped like this, and I will reliably respond with data shaped like that, regardless of what's happening on my end. Keeping that promise, even while the underlying implementation changes, is what allows large systems to evolve without collapsing under their own complexity.",
+             "The best API designers think less like engineers and more like diplomats. They ask what the consumer of this endpoint actually needs, not what's easiest to expose from the database. Naming matters. Consistency matters. A REST API that uses `snake_case` in one endpoint and `camelCase` in another isn't a technical failure, it's a trust failure, because it signals the API wasn't designed with an outside consumer in mind at all.",
+             "Versioning is where most teams get burned. Ship a breaking change without a migration path, and you don't just break your own product, you break every downstream service that quietly built assumptions on top of yours. The disciplined approach, deprecate loudly, migrate gradually, remove only after usage drops to near zero, feels slow. It is slow. It's also the only way to keep other people's trust.",
+             "If software is eating the world, APIs are the cutlery. They're rarely the interesting part of the meal, but without them, nothing gets from the kitchen to the table."
+         ]),
+    dict(title="Small Habits That Transform Productivity",
+         subtitle="Why the smallest change in your morning routine outperforms any productivity app.",
+         category="productivity", author="priya-sharma",
+         tags=["Habits", "Focus", "Routine"], featured=False, trending=True,
+         excerpt="How simple daily habits can completely transform your life over time, without requiring willpower you don't have.",
+         body=[
+             "We tend to imagine productivity as a personality trait: some people have it, some don't. In reality it's closer to a stack of small, boring habits that compound quietly in the background. The people who seem to get more done aren't working harder in any given hour, they've just removed dozens of tiny decisions that would otherwise drain their attention.",
+             "Start with the night before. Deciding what you'll work on first thing in the morning, while you're still calm and not yet reacting to a flooded inbox, changes the entire shape of the day. Willpower is highest right after you wake up and degrades with every decision you make, so spend that early willpower on the task that actually matters, not on deciding what the task should be.",
+             "The two-minute rule is unfashionable because it sounds too simple to work: if something takes less than two minutes, do it immediately instead of adding it to a list. Lists have a hidden cost, every item sitting on one occupies a small amount of background attention, a phenomenon psychologists call the Zeigarnik effect. Clearing the small stuff frees up mental bandwidth for the big stuff.",
+             "Batch shallow work instead of letting it interrupt deep work. Checking email throughout the day feels responsive, but each check comes with a switching cost that can take over twenty minutes to recover from. Three scheduled email blocks a day will make you feel less available and get you more done than checking constantly ever will.",
+             "None of these habits are dramatic. That's exactly why they work. Dramatic changes require motivation, and motivation is unreliable. Small habits only require a decision made once, and then repetition takes over."
+         ]),
+    dict(title="How Developers Can Think Beyond Code",
+         subtitle="The engineering skill nobody teaches in bootcamp: knowing what not to build.",
+         category="programming", author="aarav-mehta",
+         tags=["Engineering", "Career", "Product"], featured=False, trending=False,
+         excerpt="Writing code is the easy part. The engineers who advance fastest are the ones who learn to question the requirement before they touch the keyboard.",
+         body=[
+             "Junior engineers optimize for making the ticket disappear. Senior engineers optimize for making the right thing exist. That distinction sounds subtle until you've watched a team spend three sprints building a beautifully engineered feature that nobody asked for the right way, or that solved a problem the business had already stopped caring about.",
+             "The habit that separates the two is deceptively simple: before writing any code, ask what problem this is actually solving, and whether the proposed solution is the cheapest way to solve it. Sometimes the cheapest solution is a spreadsheet, not a feature. Sometimes it's a conversation with a customer, not a schema migration.",
+             "This doesn't mean becoming a product manager. It means treating requirements as hypotheses rather than commands. A good engineer pushes back not to be difficult, but because they've seen how expensive it is to maintain the wrong abstraction for years after the original context has been forgotten.",
+             "Code is a liability before it's an asset. Every line you write is something your future team has to read, test, and eventually delete. The engineers who think beyond code understand that the best contribution they can make some days is convincing everyone not to build something at all."
+         ]),
+    dict(title="The Science of Deep Focus",
+         subtitle="What neuroscience actually says about attention, and why multitasking is a myth.",
+         category="science", author="isha-kapoor",
+         tags=["Neuroscience", "Focus", "Productivity"], featured=True, trending=False,
+         excerpt="Your brain cannot actually multitask. Here's what's really happening when you feel productive while switching between six browser tabs.",
+         body=[
+             "What we call multitasking is, almost without exception, rapid task-switching. The brain's prefrontal cortex, the region responsible for holding a goal in working memory, can genuinely attend to only one complex task at a time. Every switch requires re-loading context, and that reload has a measurable cost, both in time and in the quality of the output produced immediately after.",
+             "Researchers studying attention residue have found that when you switch from Task A to Task B, part of your attention stays stuck on Task A, especially if it was left unfinished. This is why answering a quick message in the middle of writing a report doesn't just cost you the thirty seconds the message took, it degrades the next fifteen minutes of writing.",
+             "Deep, undistracted focus produces a disproportionate share of valuable output, not because the total hours worked are higher, but because complex cognitive work has compounding returns within a session and diminishing returns across fragmented ones. An hour of continuous focus regularly outperforms three scattered hours on the same task.",
+             "The practical implication isn't asceticism, it's architecture. Protect a small number of long, uninterrupted blocks for the work that actually requires your full cognitive stack, and be honest that everything else, email, messages, minor admin, is shallow work that can happily live in the gaps.",
+             "Attention is the scarcest resource most people have, and it's the one industry has the least incentive to protect. Understanding the neuroscience isn't about discipline for its own sake, it's about recognizing that your focus is being fought over, and choosing, deliberately, who gets it."
+         ]),
+    dict(title="Designing Better Digital Experiences",
+         subtitle="Why the best interfaces are the ones you never notice.",
+         category="design", author="meera-nair",
+         tags=["UX", "Product Design", "Craft"], featured=False, trending=False,
+         excerpt="Great design isn't about decoration, it's about removing friction so completely that the product disappears and only the task remains.",
+         body=[
+             "There's a particular kind of silence that happens when a product is designed well. No confusion, no hesitation, no moment where the user has to stop and think about the interface instead of their task. That silence is the entire goal, and it's remarkably hard to achieve, because it requires the designer to disappear.",
+             "Most design failures aren't aesthetic, they're informational. A button that looks clickable but isn't. A form that asks for information in an order that doesn't match how people actually think about the task. A loading state that gives no indication of progress, so three seconds feels like thirty. None of these require bad taste to create, they require designing the happy path without walking through the edges.",
+             "Consistency is underrated because it's invisible when done right. Every time an interface uses the same word for the same action across the whole product, save here, save there, it removes a tiny cognitive tax the user didn't know they were paying. Break that consistency once, call it 'save' in one place and 'update' in another, and you've quietly asked every user to relearn something they thought they already knew.",
+             "Constraints are a gift, not a limitation. A small screen, a slow connection, a user who has thirty seconds and one hand free, these constraints force clarity that unlimited space never demands. Some of the best interface decisions in mobile design exist specifically because there wasn't room to be lazy.",
+             "Good design, in the end, is an act of empathy disguised as a technical discipline. It's the accumulated result of thousands of small decisions made in favor of the person using the product instead of the person building it."
+         ]),
+    dict(title="What Happens Beyond the Observable Universe?",
+         subtitle="A tour of the edge of what physics can currently explain.",
+         category="science", author="isha-kapoor",
+         tags=["Space", "Physics", "Cosmology"], featured=True, trending=True,
+         excerpt="A deep dive into the possibilities of what lies beyond the observable universe, and what it could mean for how we understand reality itself.",
+         body=[
+             "The observable universe is not the entire universe, it's simply the furthest distance light has had time to travel to reach us since the Big Bang, roughly 13.8 billion years of travel time expanded further by the ongoing expansion of space itself. Beyond that boundary, there is almost certainly more universe. We just cannot, even in principle, see it.",
+             "This isn't a limitation of our telescopes, it's a limitation baked into the geometry of causality. Light from regions beyond our cosmic horizon simply hasn't had time to arrive, and because space itself is expanding, some of it never will, no matter how long we wait or how powerful our instruments become.",
+             "Several models attempt to describe what might lie beyond that horizon. The simplest assumes the universe looks roughly the same everywhere, the cosmological principle extended to its logical conclusion, an unbroken continuation of galaxies and voids stretching indefinitely. More exotic models, drawn from inflationary theory, suggest our observable universe might be one bubble among countless others, each with potentially different physical constants.",
+             "None of these ideas are currently testable in the strict sense, which is why serious cosmologists are careful to separate them from established physics. But the questions they raise are not idle speculation, they emerge directly from taking our best-confirmed theories, general relativity and inflationary cosmology, and following them to their natural conclusions.",
+             "There is a strange comfort in this uncertainty. Every answer physics provides about the universe's origins tends to open two new questions. That ratio, one answer to two questions, has held roughly steady since Galileo, and there's no particular reason to expect it will change before we exhaust the boundaries of what's even in principle knowable."
+         ]),
+    dict(title="The New Era of Learning",
+         subtitle="How personalized, on-demand education is quietly replacing the lecture hall.",
+         category="education", author="priya-sharma",
+         tags=["Education", "Learning", "EdTech"], featured=False, trending=False,
+         excerpt="The traditional classroom was built for an era of scarce information. Today's learners face the opposite problem, and the solutions look nothing alike.",
+         body=[
+             "For most of modern history, education solved a scarcity problem: information was hard to access, and a teacher standing in front of a room was often the only reliable channel for getting it. That scarcity is gone. A curious teenager today has access to more verified knowledge on a five-hundred-dollar phone than a university library offered a generation ago.",
+             "What hasn't disappeared is the harder problem education was always secretly solving: motivation, sequencing, and feedback. Knowing what to learn next, and getting told clearly when you've gotten something wrong, remains genuinely difficult to do alone, no matter how much content is available.",
+             "The most effective learning tools emerging now aren't just content libraries, they're systems that adapt to where an individual learner actually is, rather than assuming a room of thirty people are all in the same place at the same time. That shift, from broadcasting information to responding to a specific learner's gaps, is the real transformation, far more than the medium itself.",
+             "This doesn't make teachers obsolete, it changes what they're valuable for. The parts of teaching that are hardest to replicate, motivating a discouraged student, explaining an idea three different ways until one clicks, modeling how an expert actually thinks through a problem, are exactly the parts that don't scale through content alone.",
+             "The lecture hall isn't disappearing overnight, but its monopoly on how learning happens already has. What replaces it will look less like a single building and more like a personalized path that happens to occasionally include one."
+         ]),
+    dict(title="Building Technology That Feels Human",
+         subtitle="The uncanny valley isn't just visual, it applies to how software behaves too.",
+         category="technology", author="devansh-rao",
+         tags=["Product", "Technology", "AI"], featured=False, trending=False,
+         excerpt="As software gets more capable, the products that win aren't the most powerful, they're the ones that behave the way people expect.",
+         body=[
+             "There's a version of the uncanny valley that shows up in software design, not in how something looks, but in how it behaves. A chatbot that's almost helpful but subtly evasive feels worse than one that's honestly limited. A form that autocompletes wrong information confidently feels worse than one that asks a plain question.",
+             "Products that feel human share a common trait: they're honest about their limitations at the exact moment those limitations become relevant, instead of papering over them with confidence they haven't earned. A search feature that says 'no results found, try these instead' respects the user's time far more than one that silently returns nothing useful.",
+             "This matters more, not less, as AI capabilities increase. The more powerful a system appears, the higher the expectations users bring to it, and the more jarring it feels when those expectations are violated. A tool that's clearly a simple calculator gets forgiven for edge cases. A tool that's marketed as intelligent does not.",
+             "Building technology that feels human, in the end, isn't about mimicking human warmth through tone of voice or friendly copy. It's about respecting the same things a considerate person would respect, your time, your intelligence, and your right to know when you're talking to something that doesn't fully understand you yet."
+         ]),
+    dict(title="How Travel Changes Perspective",
+         subtitle="What a decade of solo trips taught me about home.",
+         category="travel", author="rohan-verma",
+         tags=["Travel", "Perspective", "Solo Travel"], featured=True, trending=True,
+         excerpt="A journey through breathtaking landscapes and unforgettable experiences, and the quiet realization that travel changes you more than it changes the map.",
+         body=[
+             "The first time you eat dinner alone in a country where you don't speak the language, something small shifts. You realize how much of your daily competence at home is borrowed, not from intelligence, but from familiarity, from knowing which menu item means what, from understanding an unspoken social rule you never had to think about because you learned it by osmosis at age six.",
+             "Travel strips that borrowed competence away and forces you to rebuild basic confidence from scratch, in public, repeatedly. It's uncomfortable in exactly the way that produces growth. You learn to read a room without shared language. You learn that most people, everywhere, are trying to help a lost stranger, not exploit one.",
+             "The clichéd advice to 'get out of your comfort zone' undersells what actually happens. It's not that the zone expands, it's that you discover the zone was never as fixed as you assumed. Comfort turns out to be a skill, not a location, one you can rebuild anywhere given enough patience with yourself.",
+             "What surprises most long-term travelers isn't what they learn about other places, it's what they learn about home. Distance makes visible the assumptions you were too close to notice, which foods you thought were universal but aren't, which customs you thought were common sense but are actually just local.",
+             "You don't travel to escape your life. You travel to see it clearly enough, from far enough away, to decide which parts of it you actually chose, and which parts you simply inherited without ever questioning."
+         ]),
+    dict(title="Lost in the Right Direction",
+         subtitle="A journey through the Amalfi coastline, one wrong turn at a time.",
+         category="travel", author="rohan-verma",
+         tags=["Travel", "Europe", "Photography"], featured=False, trending=True,
+         excerpt="A journey through breathtaking landscapes and unforgettable experiences along one of Europe's most photographed, and least understood, coastlines.",
+         body=[
+             "Every guidebook photo of the Amalfi coast looks the same, the same cliffside town, the same turquoise water, the same golden hour. What they don't show is the twenty-minute drive between towns where the road narrows to barely a car's width and the view opens up in a way no wide-angle lens ever captures properly.",
+             "I missed my planned turn on the second day and ended up in a village that doesn't appear in any of the popular itineraries. No restaurant had an English menu. The only other tourists were a German couple who looked equally lost and equally delighted about it. We ended up sharing a table, not because either of us planned to, but because the only open restaurant had exactly one free spot.",
+             "The lesson that took me years of travel to actually absorb is that the wrong turn is rarely a mistake, it's usually just an itinerary you didn't design on purpose. Some of the best meals, conversations, and photographs from this trip came from the hour I spent trying to find my way back to the road I'd meant to take.",
+             "Plan your trip, absolutely. But leave enough slack in the schedule that a wrong turn becomes an option rather than a crisis. The places worth remembering are rarely the ones you found on the first try."
+         ]),
+    dict(title="The Psychology of Habit Loops",
+         subtitle="Why willpower fails and systems win, according to behavioral science.",
+         category="self-improvement", author="priya-sharma",
+         tags=["Habits", "Psychology", "Growth"], featured=False, trending=False,
+         excerpt="Every habit, good or bad, follows the same three-part loop. Understanding it is the fastest way to actually change your behavior for good.",
+         body=[
+             "Behavioral scientists describe habits as a loop: a cue triggers a routine, which delivers a reward, and repetition strengthens the association between all three until the routine becomes close to automatic. Once you see this loop, you start noticing it everywhere, in your own life and in the products specifically engineered to exploit it.",
+             "The mistake most people make when trying to build a new habit is focusing entirely on the routine and ignoring the cue. Wanting to read more but never designing a reliable trigger for when reading happens means the habit has to be reinvented from willpower every single day, which is exhausting and unsustainable.",
+             "The fix is almost boringly practical: attach the new routine to an existing, reliable cue. Not 'I will meditate more' but 'after I pour my morning coffee, I will sit for two minutes.' The existing habit of making coffee, already automatic, becomes the cue for the new one, borrowing its reliability instead of building consistency from nothing.",
+             "Breaking a bad habit works through the same loop in reverse. You can rarely eliminate the cue entirely, but you can often swap the routine while keeping the reward. Someone who reaches for their phone out of boredom isn't addicted to the phone specifically, they're seeking a small hit of novelty. A different, cheaper source of novelty can often satisfy the same craving.",
+             "None of this requires more discipline than you currently have. It requires designing your environment so the habit you want is the path of least resistance, and the habit you don't want requires an extra, deliberate step to reach."
+         ]),
+    dict(title="Minimalism Isn't About Owning Less",
+         subtitle="The real practice behind the aesthetic everyone got wrong.",
+         category="lifestyle", author="priya-sharma",
+         tags=["Minimalism", "Lifestyle", "Mindset"], featured=False, trending=False,
+         excerpt="Minimalism became a visual trend before it became a practice, and the aesthetic version misses almost everything that made the idea useful.",
+         body=[
+             "Search for minimalism online and you'll find white walls, a single potted plant, and a capsule wardrobe photographed in perfect lighting. That's a look, not a philosophy, and mistaking one for the other is why so many people try minimalism, feel nothing change, and quietly give up.",
+             "The actual practice underneath the aesthetic is about reducing decision load, not possession count. Owning fewer things is sometimes a side effect, but the real goal is removing the low-value decisions that quietly drain attention throughout the day, so more of that attention is available for decisions that matter.",
+             "A wardrobe of ten outfits you actually like beats a wardrobe of eighty you're unsure about, not because ten is a virtuous number, but because deciding what to wear from eighty options costs real cognitive energy every single morning, energy that could go toward literally anything else.",
+             "This reframe matters because it explains why some famously 'maximalist' spaces, a cluttered artist's studio, an overflowing bookshelf, can still be minimalist in the way that matters, if every item earns its place and nothing there requires a decision the owner resents making.",
+             "Minimalism, done right, isn't about having less. It's about being deliberate enough about what you keep that you stop having to think about the rest."
+         ]),
+    dict(title="Inside the Startup That Said No to Growth",
+         subtitle="A profitable, deliberately small software company that refused every funding offer.",
+         category="business", author="kabir-anand",
+         tags=["Startups", "Bootstrapping", "Strategy"], featured=False, trending=False,
+         excerpt="Every startup story is supposed to end in a funding round. This one didn't, and the founders think that's exactly why it worked.",
+         body=[
+             "Most startup narratives follow the same arc: raise money, hire fast, grow at all costs, exit. The company I spent a week talking to for this piece did none of that. Fourteen employees, no outside investors, and a profit margin most venture-backed founders would kill for.",
+             "The founder's explanation was almost anticlimactic. They didn't need the money. Every dollar of growth capital comes attached to an expectation of growth speed, and speed, past a certain point, forces decisions that trade long-term product quality for short-term metrics that look good on a pitch deck.",
+             "Staying small wasn't a lack of ambition, it was a different definition of the goal. Instead of maximizing valuation, they optimized for a company they'd still want to run in ten years, which meant saying no to acquisition offers, no to aggressive hiring, and no to features that would have driven usage numbers up while making the actual product worse.",
+             "This model isn't right for every business, some problems genuinely require capital and speed to solve before a competitor gets there first. But the assumption that fast growth is the only legitimate measure of startup success is exactly that, an assumption, not a law of business, and this company is a working counterexample.",
+             "The most striking thing about the founders wasn't confidence, it was calm. Nobody in that office was performing hustle for an audience. They were just building something they were proud of, at a pace that let them stay proud of how it got built."
+         ]),
+    dict(title="The Hidden Cost of Context Switching at Work",
+         subtitle="Why your calendar is quietly the biggest threat to your output.",
+         category="business", author="kabir-anand",
+         tags=["Work", "Meetings", "Focus"], featured=False, trending=False,
+         excerpt="Meetings feel productive because they're visible. The real cost is what they interrupt, and that cost almost never shows up on anyone's calendar.",
+         body=[
+             "A five-person meeting that runs thirty minutes costs two and a half hours of collective attention, and that's before accounting for the time it takes each person to re-enter deep focus afterward. Most organizations track meeting time diligently and interruption cost not at all, which means the number everyone optimizes is the wrong one.",
+             "The teams that ship the most aren't the ones with the fewest meetings in absolute terms, they're the ones that cluster meetings deliberately, leaving long unbroken stretches for the kind of work that can't survive being chopped into fifteen-minute fragments between calls.",
+             "Asynchronous communication gets pitched as a productivity hack, but its real value is protecting the shape of people's days. A well-written update that people read on their own schedule preserves everyone's focus blocks. A status meeting, however brief, fragments them by design.",
+             "None of this means meetings are inherently bad, decisions genuinely requiring real-time discussion benefit from it. The failure mode is defaulting to a meeting for things that could have been a message, simply because scheduling one feels more proactive than writing one paragraph and waiting for a reply.",
+             "Protecting focus time isn't a personal productivity trick, it's a management decision, because only someone with the authority to say no to a meeting on someone else's behalf can actually create the conditions where deep work is possible at scale."
+         ]),
+    dict(title="What Marathon Training Taught Me About Everything Else",
+         subtitle="Pacing, patience, and the discipline of doing less than you feel capable of.",
+         category="health", author="ananya-iyer",
+         tags=["Running", "Health", "Discipline"], featured=False, trending=False,
+         excerpt="Training for a marathon is mostly about resisting the urge to do more, and that lesson turned out to apply to almost everything outside running too.",
+         body=[
+             "The hardest workout in most marathon training plans isn't the long run, it's the easy run, the one where your coach or plan explicitly tells you to go slower than feels natural. Runners new to structured training almost always run their easy days too fast, and it takes months to unlearn the instinct to push.",
+             "This matters physiologically, easy-paced running builds aerobic capacity and durability without accumulating the fatigue that hard efforts require days to recover from. But it also matters psychologically, learning to deliberately hold back when you feel capable of more is a discipline most of us never practice anywhere else in life.",
+             "I noticed the same pattern showing up at work almost immediately after internalizing it in training. The instinct to say yes to every opportunity, take on every project, respond to every message immediately, comes from the same place as the instinct to run every mile at race pace. It feels like commitment. It's actually a fast route to burnout.",
+             "Pacing isn't about doing less work overall, marathon training volume is genuinely high. It's about sequencing effort so the hard days can actually be hard, because the easy days protected enough recovery to make that possible. Applied outside running, that means protecting genuinely low-effort time so the high-effort time has something to draw on.",
+             "Nobody finishes a marathon by running every mile at the pace that feels good in the moment. The same turned out to be true of most things worth finishing."
+         ]),
+    dict(title="Sleep Is Not Optional, It's Infrastructure",
+         subtitle="What the research actually says about the one habit everyone underinvests in.",
+         category="health", author="ananya-iyer",
+         tags=["Sleep", "Health", "Science"], featured=False, trending=False,
+         excerpt="We treat sleep as a variable to cut when schedules get tight. The research suggests we have that priority almost exactly backwards.",
+         body=[
+             "Sleep deprivation doesn't feel like sleep deprivation from the inside. One of the most consistent findings in sleep research is that people chronically underestimate how impaired they are after even mild, sustained sleep restriction, because subjective alertness adapts faster than actual cognitive performance does.",
+             "The consequences aren't limited to feeling tired. Working memory, emotional regulation, and the prefrontal cortex's ability to inhibit impulsive decisions all degrade measurably after a single night of short sleep, and the effects compound across a week of insufficient rest in ways that are difficult to reverse with one long weekend catch-up.",
+             "Framing sleep as a lifestyle preference, something you can trade away when a deadline demands it, misses that it's closer to infrastructure. Just as you wouldn't run a data center without cooling and expect performance to hold steady, you can't run a brain without adequate recovery and expect judgment, memory, and mood to hold steady either.",
+             "The good news is that sleep responds quickly to consistent habits. A fixed wake time, even on weekends, does more to stabilize sleep quality than almost any other single intervention, because it anchors your circadian rhythm regardless of what time you managed to fall asleep the night before.",
+             "Treating sleep as negotiable is one of the most common and most costly mistakes in how people manage their own performance. It's rarely the thing you should cut first. It's usually the thing protecting everything else you're trying to do."
+         ]),
+    dict(title="The Forgotten Regional Dishes of the Konkan Coast",
+         subtitle="A culinary journey through recipes that rarely leave home kitchens.",
+         category="food", author="vikram-singh",
+         tags=["Cuisine", "Culture", "Recipes"], featured=False, trending=False,
+         excerpt="Some of the most distinctive regional cooking never makes it onto a restaurant menu. Here's why that's a loss worth paying attention to.",
+         body=[
+             "Restaurant menus tend to flatten a region's cuisine down to whichever three or four dishes travel well and photograph nicely. The Konkan coast's culinary identity, built on coconut, kokum, and a fermentation tradition that predates refrigeration by centuries, is far richer than the handful of dishes that made it onto tourist-facing menus.",
+             "I spent two weeks visiting home kitchens along the coast, and the dish that stayed with me longest wasn't on a single restaurant's menu. A humble fish curry, thin rather than thick, sharpened with kokum instead of tamarind, made differently in nearly every household depending on which grandmother's recipe was being followed that week.",
+             "What struck me was how much knowledge lives entirely in muscle memory and taste, not written recipes. Cooks would describe quantities as 'until it tastes right' and mean it precisely, having internalized ratios through repetition that no measuring cup could replicate on a first attempt.",
+             "This kind of cooking resists standardization, which is exactly why it's disappearing as younger generations move to cities and reach for simpler, faster meals. Documenting it isn't about preservation for its own sake, it's about making sure the knowledge has somewhere to live once it's no longer being passed down at the stove.",
+             "The recipes in this piece are approximations, translated as faithfully as I could manage from watching rather than measuring. They won't taste exactly like the versions I ate. That's fine. Regional food was never supposed to be identical twice."
+         ]),
+    dict(title="Fermentation, Explained Without the Mysticism",
+         subtitle="The actual microbiology behind sourdough, kimchi, and everything in between.",
+         category="food", author="vikram-singh",
+         tags=["Food Science", "Fermentation", "Cooking"], featured=False, trending=False,
+         excerpt="Fermentation gets discussed like folk magic. It's actually well-understood microbiology, and understanding it makes you a much better cook.",
+         body=[
+             "Fermentation is often presented with an air of mystery, starter cultures with names, rituals around feeding schedules, warnings about ruining a batch through some unspecified mistake. Underneath the mysticism is a straightforward microbiological process: specific bacteria and yeast metabolize sugars in food, producing acids, alcohol, or gas as byproducts, and those byproducts are what change flavor and texture.",
+             "A sourdough starter isn't magic, it's a stable community of wild yeast and lactic acid bacteria living in a flour-and-water mixture, competing with and depending on each other in a predictable way. Feed it regularly and the population stabilizes into a rhythm you can set your baking schedule around.",
+             "The reason fermentation recipes emphasize precise conditions, temperature, salt ratio, container cleanliness, isn't superstition, it's about controlling which microorganisms win the competition for the available sugars. Too little salt in a kimchi ferment, and undesirable bacteria can outcompete the lactic acid bacteria you actually want.",
+             "Once you understand the mechanism, troubleshooting stops being guesswork. A sluggish starter usually means temperature, not a mysterious loss of potency. A ferment that smells wrong usually means a contamination issue traceable to a specific step, not bad luck.",
+             "Demystifying fermentation doesn't make it less satisfying, if anything it makes it more so. Watching a jar of cabbage and salt transform into kimchi over a week is more interesting once you understand it's not a leap of faith, it's a controlled, observable microbial process you're actively steering."
+         ]),
+    dict(title="What Renaissance Painters Understood About Attention",
+         subtitle="Composition tricks from five centuries ago that still explain why your eye moves the way it does.",
+         category="art-culture", author="sana-qureshi",
+         tags=["Art History", "Design", "Composition"], featured=False, trending=False,
+         excerpt="Long before eye-tracking studies existed, painters had already worked out, through trial and error, exactly how to guide a viewer's attention.",
+         body=[
+             "Stand in front of a well-composed Renaissance painting and your eye moves through it in a sequence the artist planned, whether or not you notice the planning. Diagonal lines, contrasts of light and dark, and the direction a painted figure's gaze points all function as instructions, quietly telling your attention where to go next and in what order.",
+             "Caravaggio's use of tenebrism, extreme contrast between light and shadow, wasn't purely dramatic flourish. It functioned as a spotlight, directing attention to precisely the figures and gestures that mattered to the narrative while letting the rest of the canvas recede into near-invisibility. Modern UI designers use the exact same principle when they dim a background to focus attention on a modal dialog.",
+             "The golden ratio gets cited constantly in discussions of classical composition, sometimes accurately, often as retrofitted pattern-matching onto paintings that weren't deliberately built around it. What's less disputed is that Renaissance painters were meticulous about balance, ensuring that visual weight, not literal size, was distributed across a canvas in a way that felt stable rather than lopsided.",
+             "These aren't just historical curiosities. Modern eye-tracking research confirms that viewers really do follow the gaze direction of figures within an image, really are drawn first to areas of high contrast, and really do perceive compositional imbalance as a kind of visual discomfort, even without being able to articulate why.",
+             "What Renaissance painters achieved through centuries of accumulated craft intuition, contemporary designers can now verify with eye-tracking hardware. The remarkable part isn't that the old techniques still work, it's how precisely they anticipated findings that wouldn't be formally studied for another four hundred years."
+         ]),
+    dict(title="The Design Language Hidden in Everyday Objects",
+         subtitle="How good product design communicates without a single word.",
+         category="design", author="meera-nair",
+         tags=["Design", "Product", "Everyday Objects"], featured=False, trending=False,
+         excerpt="A well-designed object tells you how to use it before you've read a single instruction. That silent communication is a discipline of its own.",
+         body=[
+             "Pick up a pair of scissors you've never seen before and you'll know within a second how to hold them, without instructions, without prior experience with that exact model. The design communicates its own use through shape alone, a property designers call affordance, and it's one of the oldest and most underappreciated ideas in the field.",
+             "Doors that need a handwritten 'push' sign taped to them have failed at this basic communication. A flat plate signals push, a handle signals pull, and when the hardware contradicts that signal, no amount of signage fully fixes the confusion, people's hands will keep reaching for the handle regardless of what the sign says.",
+             "This principle scales up dramatically once you notice it. A well-designed kitchen tool, a well-designed staircase railing, and a well-designed software button are all solving the identical problem: communicating function through form, before the user has to think consciously about it at all.",
+             "Digital interfaces inherited this vocabulary from physical objects, and the best ones still honor it. A button that looks pressable, with subtle depth and shadow, gets clicked with more confidence than a flat rectangle of text, even when both are functionally identical, because one borrows a physical metaphor the brain already trusts.",
+             "The objects that disappear into daily use, the ones you never consciously think about while using them, are almost never accidents. They're the result of design decisions so well-matched to human expectation that the decisions themselves become invisible."
+         ]),
+    dict(title="You Don't Need More Discipline, You Need a Better Environment",
+         subtitle="Why willpower is the least reliable tool for lasting change.",
+         category="self-improvement", author="priya-sharma",
+         tags=["Discipline", "Growth", "Mindset"], featured=False, trending=False,
+         excerpt="Most self-improvement advice asks you to want things more intensely. The people who actually change their behavior long-term rarely rely on wanting harder.",
+         body=[
+             "Willpower behaves like a limited resource across a single day, a phenomenon researchers call ego depletion, though the size of the effect is still debated in the literature. What's much less debated is that relying on willpower as your primary change strategy sets you up to fail on exactly the days you're already stressed, tired, or overwhelmed, which tend to be the days that matter most.",
+             "The people who successfully change long-standing habits usually did something less glamorous than summoning more discipline, they redesigned their environment so the desired behavior required less willpower to execute, and the undesired behavior required more.",
+             "This can be almost absurdly simple. Someone trying to eat healthier who keeps fruit visible on the counter and processed snacks in an inconvenient, out-of-sight cupboard will make better choices at a much higher rate than someone relying purely on resisting temptation in the moment, because the environment is now doing part of the work.",
+             "This isn't a claim that willpower doesn't matter at all, it's a claim that it's a poor foundation to build an entire change strategy on, given how unreliable it is under stress. A better strategy treats willpower as a limited emergency reserve, and environment design as the primary engine.",
+             "Real, lasting change tends to look less like a dramatic act of self-control and more like a series of quiet decisions about your surroundings, made once, that keep paying off every day afterward without requiring a fresh act of resolve."
+         ]),
+    dict(title="The Quiet Case for Boring Technology",
+         subtitle="Why the most reliable systems are often the least exciting ones.",
+         category="technology", author="aarav-mehta",
+         tags=["Engineering", "Reliability", "Architecture"], featured=False, trending=False,
+         excerpt="Engineering teams love new tools. Production systems love boring ones. Knowing when to choose which is a genuinely underrated skill.",
+         body=[
+             "There's a well-known engineering concept called an 'innovation budget': every team has a limited amount of risk it can absorb across a project, and every unfamiliar technology choice spends part of that budget. Spend it all on a trendy new database, a novel framework, and an experimental deployment pipeline simultaneously, and you've stacked three unknowns on top of each other in a system that needs to actually work.",
+             "Boring technology, in this context, doesn't mean bad technology. It means well-understood technology, tools with a decade of production battle scars, extensive documentation, and predictable failure modes that someone on the team has already seen before and knows how to fix at 3am.",
+             "The appeal of new tools is real and not irrational, they often solve genuine limitations of older ones. The mistake isn't adopting new technology, it's adopting several pieces of new technology at once, in the part of the system where reliability matters most, purely because each individual piece looked appealing in isolation.",
+             "Teams that ship reliably tend to spend their innovation budget deliberately: boring, proven infrastructure for the parts of the system that must not fail, and reserve genuine experimentation for the parts where failure is cheap and recoverable, a new internal tool, a non-critical feature flag, a prototype nobody depends on yet.",
+             "Boring technology will never trend on social media. It will, however, still be running quietly in production five years from now, which is a track record most exciting technology never gets the chance to earn."
+         ]),
+    dict(title="How Recommendation Systems Actually Decide What You See",
+         subtitle="A plain-language breakdown of the algorithms shaping your feed.",
+         category="artificial-intelligence", author="devansh-rao",
+         tags=["Machine Learning", "Algorithms", "AI"], featured=False, trending=False,
+         excerpt="Recommendation algorithms get blamed for a lot, but few people outside the field understand the actual mechanics behind how they choose what to show you.",
+         body=[
+             "Most recommendation systems, whether on a video platform, a shopping site, or a music app, are trying to solve the same underlying problem: given everything you and people similar to you have engaged with before, what's the highest-probability next thing you'll also engage with. The mechanics vary, but that objective is almost universal.",
+             "Collaborative filtering, one of the oldest approaches, works entirely from behavior, not content. It never needs to understand what a video is actually about, it only needs to notice that people who liked video A also tended to like video B, and use that pattern to make predictions, even for content it has never analyzed directly.",
+             "Content-based approaches work differently, analyzing the actual attributes of what you've engaged with, genre, tags, visual features, and finding more items that share those attributes. Most production systems today blend both approaches, along with dozens of other signals, into a single ranking model rather than relying on either alone.",
+             "The controversial part isn't the mechanism, it's the objective function. A system trained purely to maximize watch time or engagement will, entirely without any hardcoded intent to do so, learn that outrage, novelty, and mild anxiety are reliably engaging, because human attention responds to those signals whether we consciously endorse that response or not.",
+             "This is why the meaningful conversation about recommendation systems isn't really about the algorithms' sophistication, it's about which objective they're optimized for, and whether that objective was ever actually aligned with what users say they want, versus what keeps them scrolling in the moment."
+         ]),
+    dict(title="Learning to Code Later in Life",
+         subtitle="What I wish someone had told me before I started at thirty-four.",
+         category="programming", author="aarav-mehta",
+         tags=["Learning", "Career Change", "Programming"], featured=False, trending=False,
+         excerpt="Career-changers learning to code face a very different set of challenges than college students do, and most beginner resources aren't written for them.",
+         body=[
+             "Most programming tutorials are written with an implicit audience in mind: someone in their late teens or early twenties, with few competing obligations, learning as a first career rather than a pivot. If you're learning to code at thirty-four with a job, a family, and two hours of free time on a good day, a lot of standard advice quietly doesn't apply to you, and nobody tells you that upfront.",
+             "The biggest adjustment wasn't technical, it was psychological. Years of professional competence in a previous field had trained me to expect steady progress from effort. Early programming doesn't work that way, you can spend an entire evening stuck on an error message that turns out to be a single misplaced character, and that kind of disproportionate frustration-to-progress ratio is genuinely hard to get used to as an adult who's used to being good at things.",
+             "What actually helped was picking a real, if small, project instead of working through tutorials indefinitely. Tutorials teach syntax, but they rarely teach the debugging instinct that comes from building something of your own choosing, hitting a wall nobody wrote a solution for, and having to figure it out.",
+             "Time constraints, counterintuitively, became an advantage rather than a pure disadvantage. Having only forty-five minutes most evenings forced ruthless prioritization, I couldn't afford to go down every interesting tangent, so I stayed focused on what the current project actually needed, which turned out to build practical skill faster than open-ended exploration would have.",
+             "If you're considering this path later than feels conventional, the honest advice is that the timeline will be different, and probably longer, than what younger learners experience. It's also entirely survivable, and the professional judgment you bring from a previous career turns out to be worth more in this one than most beginner guides give it credit for."
+         ]),
+
+    # --- Demo account articles: Ch Raja Siva Reddy (auth-11) -----------------
+    # These three seed the "My Stories" demo flow (edit / delete / leave
+    # untouched). They are only written here, at seed time — the running
+    # server never regenerates data/posts.json, so anything you edit or
+    # delete while testing stays edited/deleted until this script is rerun.
+    dict(title="Building Better Web Applications with Node.js",
+         subtitle="What I learned moving from toy scripts to a real backend.",
+         category="programming", author="ch-raja-siva-reddy",
+         tags=["Node.js", "Express", "Backend", "Web Development"], featured=False, trending=False,
+         excerpt="Node.js finally made backend development click for me. Here's what I picked up building my first real Express applications, mistakes included.",
+         body=[
+             "For the longest time, backend development felt like a separate universe from the JavaScript I already knew from building small frontend projects. Node.js was the bridge that made it click: the same language, the same mental model of functions and callbacks, just pointed at a server instead of a browser tab. My first real Express app was embarrassingly simple, a handful of routes returning hardcoded JSON, but it was the first time a backend I built actually felt like mine instead of a black box.",
+             "The biggest early mistake was treating every route handler as its own self-contained script. Business logic, database calls, and response formatting all lived in the same function, which worked fine for three routes and became unmanageable by the tenth. Splitting things into routes, controllers, and a small utilities layer wasn't just a style preference, it was the difference between being able to find a bug in thirty seconds versus scrolling through four hundred lines of tangled logic.",
+             "Middleware was the concept that took the longest to actually sink in. I understood the syntax immediately, `app.use()` and a function with `(req, res, next)`, but I didn't understand why it mattered until I built something that needed the same logic, checking a request body, logging, handling errors, in more than one place. Once I stopped copy-pasting that logic into every route and pulled it into shared middleware, the whole app got noticeably easier to reason about.",
+             "Error handling is the part nobody warns you is going to take real effort. It's easy to write the success path first and assume errors will sort themselves out. They don't. A single unhandled promise rejection can crash an entire Node process, so wrapping async route logic properly and centralizing error responses through one error-handling middleware turned out to be one of the highest-leverage things I did, even in a small project.",
+             "What surprised me most is how much of \"backend development\" is really just clear thinking about data: what shape it arrives in, what shape it should leave in, and what should happen when it's missing or malformed. Node.js and Express didn't make that thinking easier by magic, they just got out of the way enough that I could finally focus on it."
+         ]),
+    dict(title="How Artificial Intelligence Is Changing Everyday Technology",
+         subtitle="You don't need a machine learning degree to notice how much has already changed.",
+         category="artificial-intelligence", author="ch-raja-siva-reddy",
+         tags=["AI", "Technology", "Everyday Tech"], featured=False, trending=False,
+         excerpt="AI stopped being a research-lab curiosity a while ago. As a student watching it arrive in ordinary apps, here's what actually feels different.",
+         body=[
+             "A few years ago, artificial intelligence felt like something that happened in research papers and demo videos, impressive but distant from anything I'd actually use before breakfast. That distance has basically disappeared. The autocomplete suggesting the rest of my sentence, the photo app that already knows which pictures have my friends in them, the customer support chat that answers a question correctly on the first try, all of that is AI quietly doing real work, not a lab experiment anymore.",
+             "What strikes me as a student watching this unfold is how invisible the good implementations are. Nobody advertises \"now powered by a neural network\" on the features that work best, they just work, and you stop noticing there was ever a harder, dumber way of doing the same task. The AI that's easiest to point at, chatbots, image generators, is often the least representative of where the technology is actually having the most impact.",
+             "The shift I find most interesting isn't the flashy stuff, it's how AI is becoming infrastructure rather than a feature. Spam filters, fraud detection, route optimization in maps apps, none of that gets a product launch keynote, but all of it is quietly running machine learning models that would have been research-grade sophistication a decade ago. The technology matured from novelty to plumbing faster than most predictions expected.",
+             "This doesn't mean the hype is fully justified. A lot of what gets marketed as \"AI-powered\" is a thin wrapper around an API call, and the gap between a slick demo and a reliable product is still enormous. Learning to tell the difference, is this genuinely solving a hard problem well, or just repackaging an existing feature with a trendier name, has become its own useful skill.",
+             "As someone still early in a technology career, the practical takeaway isn't to become an AI researcher overnight. It's to get comfortable enough with how these systems work, and where they fail, to use them well and to be honest about their limits. That combination, curiosity plus a healthy amount of skepticism, seems like the actually useful skill going forward."
+         ]),
+    dict(title="From Student to Developer: Building Projects That Matter",
+         subtitle="What changed when I stopped following tutorials and started shipping things.",
+         category="self-improvement", author="ch-raja-siva-reddy",
+         tags=["Career", "Learning", "Projects", "Students"], featured=False, trending=False,
+         excerpt="Tutorials taught me syntax. Building my own projects, badly at first, taught me almost everything else about actually becoming a developer.",
+         body=[
+             "I finished a lot of tutorials before I built anything of my own, and for a while I mistook that for progress. Following along with a video, typing the same code someone else already debugged, feels productive. It wasn't until I tried building something without a tutorial open in the next tab that I realized how much of that knowledge hadn't actually transferred. I could follow instructions. I couldn't yet solve a problem that didn't come with instructions.",
+             "The first project I built entirely on my own was small and, looking back, not very good. But it was mine in a way none of the tutorial projects were, every bug was a bug I had to actually diagnose, every design decision was one I had to actually make and live with. That project taught me more in two weeks than the previous two months of tutorials combined, mostly because I was finally forced to get comfortable being stuck.",
+             "Picking a project that solved a real, if small, problem for me personally turned out to matter more than picking an impressive one. A tool I actually used stayed motivating past the first frustrating bug, because I wanted the finished thing to exist. A project I chose only because it would look good on a resume was much easier to abandon the moment it got hard, since I had no attachment to it beyond the idea of having built it.",
+             "Sharing unfinished, imperfect work turned out to be uncomfortable and useful in roughly equal measure. Putting a rough project somewhere other people could see it meant real feedback, some of it about things I hadn't even considered, and a gentle but real pressure to actually finish things instead of letting them quietly die in a folder labeled \"someday.\"",
+             "The distance between student and developer, at least in my experience so far, isn't really about how much syntax you know. It's about how many times you've sat with a problem that didn't have a clear answer and worked through it anyway. Every project, even the small unimpressive ones, adds another rep to that muscle, and that muscle turns out to be most of the job."
+         ]),
+]
+
+posts = []
+cat_lookup = {c["slug"]: c for c in categories}
+auth_lookup = {a["slug"]: a for a in authors}
+
+base_date = 2024
+import datetime
+start = datetime.date(2024, 1, 15)
+
+for i, p in enumerate(post_defs, start=1):
+    words = sum(len(para.split()) for para in p["body"])
+    reading_time = max(3, round(words / 200))
+    pub_date = start + datetime.timedelta(days=i * 4)
+    updated = pub_date + datetime.timedelta(days=6) if i % 5 == 0 else pub_date
+    cat = cat_lookup[p["category"]]
+    author = auth_lookup[p["author"]]
+    cat["postCount"] += 1
+    post_id = f"post-{i:03d}"
+    posts.append({
+        "id": post_id,
+        "slug": p["title"].lower().replace(",", "").replace("?", "").replace(":", "").replace("'", "").replace(".", "").replace("  ", " ").replace(" ", "-"),
+        "title": p["title"],
+        "subtitle": p["subtitle"],
+        "excerpt": p["excerpt"],
+        "content": p["body"],
+        "category": cat["name"],
+        "categorySlug": cat["slug"],
+        "author": author["name"],
+        "authorId": author["id"],
+        "authorSlug": author["slug"],
+        "image": f"https://picsum.photos/seed/openverse{i}/900/600",
+        "date": pub_date.isoformat(),
+        "updatedDate": updated.isoformat(),
+        "readingTime": reading_time,
+        "views": 800 + (i * 137) % 9000,
+        "likes": 40 + (i * 23) % 600,
+        "tags": p["tags"],
+        "featured": p["featured"],
+        "trending": p["trending"]
+    })
+
+for a in authors:
+    a["articleCount"] = sum(1 for p in posts if p["authorId"] == a["id"])
+
+with open(os.path.join(OUT, "categories.json"), "w") as f:
+    json.dump(categories, f, indent=2)
+
+with open(os.path.join(OUT, "authors.json"), "w") as f:
+    json.dump(authors, f, indent=2)
+
+with open(os.path.join(OUT, "posts.json"), "w") as f:
+    json.dump(posts, f, indent=2)
+
+for fname in ["comments.json", "contacts.json", "subscribers.json"]:
+    with open(os.path.join(OUT, fname), "w") as f:
+        json.dump([], f, indent=2)
+
+print(f"Generated {len(posts)} posts, {len(authors)} authors, {len(categories)} categories")

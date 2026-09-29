@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sign Up — OpenVerse</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 40 40%22><path d=%22M20 2 L36 11 V29 L20 38 L4 29 V11 Z%22 fill=%22%238b5cf6%22/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet" href="/css/animations.css">
+<link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+
+<div id="navbar-root"></div>
+
+<div class="auth-wrap">
+  <div class="hero-bg"></div>
+  <div class="glass auth-card" style="position:relative;z-index:1">
+    <h1>Join OpenVerse</h1>
+    <p class="sub">Create an account to write, bookmark, and follow your favorite authors.</p>
+    <form class="auth-form" id="signupForm">
+      <div class="form-group" style="margin:0">
+        <label for="suName">Full name</label>
+        <input type="text" id="suName" placeholder="Jane Doe" required minlength="2">
+      </div>
+      <div class="form-group" style="margin:0">
+        <label for="suEmail">Email</label>
+        <input type="email" id="suEmail" placeholder="you@example.com" required>
+      </div>
+      <div class="form-group" style="margin:0">
+        <label for="suPassword">Password</label>
+        <input type="password" id="suPassword" placeholder="At least 6 characters" required minlength="6">
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Create Account</button>
+    </form>
+    <div class="auth-note">This is a demo sign-up: your account is created for real via <code>POST /api/auth/signup</code> and stored in <code>data/users.json</code> with a salted, hashed password (never plaintext) — it just isn't production-grade auth (no sessions/JWT, no email verification).</div>
+    <div class="auth-switch">Already have an account? <a href="/signin">Sign in</a></div>
+  </div>
+</div>
+
+<div id="footer-root" style="display:none"></div>
+
+<script src="/js/main.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

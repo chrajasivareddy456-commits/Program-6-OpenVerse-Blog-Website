@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="240" height="240" role="img">
+  <defs>
+    <linearGradient id="av-auth4" x1="0" y1="0" x2="240" y2="240" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#7e22ce"/>
+      <stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+    <radialGradient id="avbg-auth4" cx="0.3" cy="0.25" r="0.9">
+      <stop offset="0" stop-color="#1c1533"/>
+      <stop offset="1" stop-color="#0a0a16"/>
+    </radialGradient>
+  </defs>
+  <circle cx="120.0" cy="120.0" r="120.0" fill="url(#avbg-auth4)"/>
+  <circle cx="120.0" cy="120.0" r="117.0" fill="none" stroke="url(#av-auth4)" stroke-width="3" opacity="0.55"/>
+  <circle cx="120.0" cy="100.8" r="72.0" fill="url(#av-auth4)" opacity="0.22"/>
+  <text x="50%" y="56%" font-family="'Space Grotesk', sans-serif" font-size="81" font-weight="700" fill="url(#av-auth4)" text-anchor="middle" dominant-baseline="middle">DR</text>
+</svg>

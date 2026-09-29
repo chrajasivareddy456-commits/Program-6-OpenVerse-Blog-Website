@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cat-01",
+    "name": "Technology",
+    "slug": "technology",
+    "description": "General technology trends, hardware, and the tools shaping how we work and live.",
+    "icon": "💻",
+    "postCount": 2
+  },
+  {
+    "id": "cat-02",
+    "name": "Artificial Intelligence",
+    "slug": "artificial-intelligence",
+    "description": "Machine learning, neural networks, and the systems learning to think alongside us.",
+    "icon": "🤖",
+    "postCount": 2
+  },
+  {
+    "id": "cat-03",
+    "name": "Programming",
+    "slug": "programming",
+    "description": "Languages, frameworks, and the craft of writing software that lasts.",
+    "icon": "🧑‍💻",
+    "postCount": 4
+  },
+  {
+    "id": "cat-04",
+    "name": "Science",
+    "slug": "science",
+    "description": "Physics, space, biology, and the questions that keep researchers up at night.",
+    "icon": "🔭",
+    "postCount": 2
+  },
+  {
+    "id": "cat-05",
+    "name": "Education",
+    "slug": "education",
+    "description": "How people learn, teach, and build skills in a world that keeps changing.",
+    "icon": "🎓",
+    "postCount": 1
+  },
+  {
+    "id": "cat-06",
+    "name": "Business",
+    "slug": "business",
+    "description": "Startups, strategy, and the decisions behind the companies we use every day.",
+    "icon": "📈",
+    "postCount": 2
+  },
+  {
+    "id": "cat-07",
+    "name": "Productivity",
+    "slug": "productivity",
+    "description": "Systems, habits, and tools for getting meaningful work done.",
+    "icon": "⚡",
+    "postCount": 1
+  },
+  {
+    "id": "cat-08",
+    "name": "Lifestyle",
+    "slug": "lifestyle",
+    "description": "Everyday living, routines, and the small choices that shape a good life.",
+    "icon": "🌿",
+    "postCount": 1
+  },
+  {
+    "id": "cat-09",
+    "name": "Travel",
+    "slug": "travel",
+    "description": "Journeys, places, and the perspective shift that comes from leaving home.",
+    "icon": "🧭",
+    "postCount": 2
+  },
+  {
+    "id": "cat-10",
+    "name": "Health",
+    "slug": "health",
+    "description": "Evidence-based fitness, nutrition, and mental wellbeing.",
+    "icon": "❤️",
+    "postCount": 2
+  },
+  {
+    "id": "cat-11",
+    "name": "Food",
+    "slug": "food",
+    "description": "Recipes, cuisines, and the culture simmering behind every dish.",
+    "icon": "🍲",
+    "postCount": 2
+  },
+  {
+    "id": "cat-12",
+    "name": "Art & Culture",
+    "slug": "art-culture",
+    "description": "Art, history, and the stories humans have always told each other.",
+    "icon": "🎨",
+    "postCount": 1
+  },
+  {
+    "id": "cat-13",
+    "name": "Design",
+    "slug": "design",
+    "description": "Visual design, product design, and the craft of making things usable.",
+    "icon": "🎯",
+    "postCount": 2
+  },
+  {
+    "id": "cat-14",
+    "name": "Self Improvement",
+    "slug": "self-improvement",
+    "description": "Mindset, growth, and the long game of becoming who you want to be.",
+    "icon": "🌱",
+    "postCount": 3
+  }
+]

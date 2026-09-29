@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" width="900" height="600" role="img">
+  <defs>
+    <linearGradient id="fb-bg" x1="0" y1="0" x2="900" y2="600" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#0d0b1a"/>
+      <stop offset="1" stop-color="#150f2b"/>
+    </linearGradient>
+    <linearGradient id="fb-accent" x1="0" y1="0" x2="900" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#8b5cf6"/>
+      <stop offset="1" stop-color="#3b82f6"/>
+    </linearGradient>
+  </defs>
+  <rect width="900" height="600" fill="url(#fb-bg)"/>
+  <rect width="900" height="600" fill="none" stroke="url(#fb-accent)" stroke-opacity="0.3" stroke-width="2"/>
+  <path d="M404.0 270.0 L496.0 270.0 L496.0 330.0 L404.0 330.0 Z" fill="none" stroke="url(#fb-accent)" stroke-width="4" stroke-opacity="0.7" rx="8"/>
+  <circle cx="432.0" cy="290.0" r="8" fill="url(#fb-accent)" opacity="0.7"/>
+  <path d="M404.0 318.0 L440.0 292.0 L464.0 310.0 L496.0 286.0 L496.0 330.0 L404.0 330.0 Z" fill="url(#fb-accent)" opacity="0.35"/>
+  <text x="50%" y="364.0" font-family="'Inter', sans-serif" font-size="20" fill="#a6a2bd" text-anchor="middle">OpenVerse</text>
+</svg>

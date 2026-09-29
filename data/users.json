@@ -1,0 +1,11 @@
+[
+  {
+    "id": "user-01",
+    "authorId": "auth-11",
+    "name": "Ch Raja Siva Reddy",
+    "email": "raja@openverse.com",
+    "passwordSalt": "190d974a36777d16eee642322c9f9a5b",
+    "passwordHash": "c56308d44a9f9a22c8a96d3bb154029ee3ae34c7974263f0f26f738cfb53ff8af1066a007481a153068c4874ba1f9cfa247b7c796348f25dbe900bba3455beaa",
+    "createdAt": "2026-09-09T06:08:50.245Z"
+  }
+]

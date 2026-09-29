@@ -1,0 +1,211 @@
+[
+  {
+    "id": "auth-01",
+    "slug": "aarav-mehta",
+    "name": "Aarav Mehta",
+    "avatar": "/assets/images/authors/aarav-mehta.svg",
+    "bio": "Senior software engineer turned technical writer. Aarav spends his nights reverse-engineering how large systems fail so mornings can be calmer.",
+    "expertise": [
+      "Technology",
+      "Programming"
+    ],
+    "articleCount": 4,
+    "followers": 6006,
+    "social": {
+      "twitter": "https://twitter.com/aaravmehta",
+      "linkedin": "https://linkedin.com/in/aarav-mehta",
+      "website": "https://aarav-mehta.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-02",
+    "slug": "priya-sharma",
+    "name": "Priya Sharma",
+    "avatar": "/assets/images/authors/priya-sharma.svg",
+    "bio": "Productivity researcher and former project manager. Priya writes about the unglamorous habits that quietly compound into a better life.",
+    "expertise": [
+      "Productivity",
+      "Self Improvement"
+    ],
+    "articleCount": 5,
+    "followers": 5291,
+    "social": {
+      "twitter": "https://twitter.com/priyasharma",
+      "linkedin": "https://linkedin.com/in/priya-sharma",
+      "website": "https://priya-sharma.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-03",
+    "slug": "rohan-verma",
+    "name": "Rohan Verma",
+    "avatar": "/assets/images/authors/rohan-verma.svg",
+    "bio": "Travel photographer who has crossed 40 countries with a single carry-on. Rohan believes the best stories are found off the itinerary.",
+    "expertise": [
+      "Travel",
+      "Lifestyle"
+    ],
+    "articleCount": 2,
+    "followers": 4147,
+    "social": {
+      "twitter": "https://twitter.com/rohanverma",
+      "linkedin": "https://linkedin.com/in/rohan-verma",
+      "website": "https://rohan-verma.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-04",
+    "slug": "isha-kapoor",
+    "name": "Isha Kapoor",
+    "avatar": "/assets/images/authors/isha-kapoor.svg",
+    "bio": "Astrophysicist by training, storyteller by instinct. Isha translates dense research papers into ideas anyone can get lost in.",
+    "expertise": [
+      "Science",
+      "Education"
+    ],
+    "articleCount": 2,
+    "followers": 3575,
+    "social": {
+      "twitter": "https://twitter.com/ishakapoor",
+      "linkedin": "https://linkedin.com/in/isha-kapoor",
+      "website": "https://isha-kapoor.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-05",
+    "slug": "devansh-rao",
+    "name": "Devansh Rao",
+    "avatar": "/assets/images/authors/devansh-rao.svg",
+    "bio": "Machine learning engineer building recommendation systems by day. Devansh writes to make AI feel less like magic and more like mechanics.",
+    "expertise": [
+      "Artificial Intelligence",
+      "Technology"
+    ],
+    "articleCount": 3,
+    "followers": 4719,
+    "social": {
+      "twitter": "https://twitter.com/devanshrao",
+      "linkedin": "https://linkedin.com/in/devansh-rao",
+      "website": "https://devansh-rao.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-06",
+    "slug": "meera-nair",
+    "name": "Meera Nair",
+    "avatar": "/assets/images/authors/meera-nair.svg",
+    "bio": "UX designer and design systems lead. Meera is obsessed with the tiny details that make digital products feel human.",
+    "expertise": [
+      "Design",
+      "Business"
+    ],
+    "articleCount": 2,
+    "followers": 4433,
+    "social": {
+      "twitter": "https://twitter.com/meeranair",
+      "linkedin": "https://linkedin.com/in/meera-nair",
+      "website": "https://meera-nair.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-07",
+    "slug": "kabir-anand",
+    "name": "Kabir Anand",
+    "avatar": "/assets/images/authors/kabir-anand.svg",
+    "bio": "Founder of two failed startups and one that's still standing. Kabir writes candidly about building things people actually want.",
+    "expertise": [
+      "Business",
+      "Productivity"
+    ],
+    "articleCount": 2,
+    "followers": 2717,
+    "social": {
+      "twitter": "https://twitter.com/kabiranand",
+      "linkedin": "https://linkedin.com/in/kabir-anand",
+      "website": "https://kabir-anand.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-08",
+    "slug": "ananya-iyer",
+    "name": "Ananya Iyer",
+    "avatar": "/assets/images/authors/ananya-iyer.svg",
+    "bio": "Registered dietitian and long-distance runner. Ananya writes evidence-based health content without the fad-diet noise.",
+    "expertise": [
+      "Health",
+      "Food"
+    ],
+    "articleCount": 2,
+    "followers": 4004,
+    "social": {
+      "twitter": "https://twitter.com/ananyaiyer",
+      "linkedin": "https://linkedin.com/in/ananya-iyer",
+      "website": "https://ananya-iyer.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-09",
+    "slug": "vikram-singh",
+    "name": "Vikram Singh",
+    "avatar": "/assets/images/authors/vikram-singh.svg",
+    "bio": "Chef turned food writer documenting regional cuisines before they disappear from home kitchens. Vikram cooks first, writes second.",
+    "expertise": [
+      "Food",
+      "Culture"
+    ],
+    "articleCount": 2,
+    "followers": 3146,
+    "social": {
+      "twitter": "https://twitter.com/vikramsingh",
+      "linkedin": "https://linkedin.com/in/vikram-singh",
+      "website": "https://vikram-singh.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-10",
+    "slug": "sana-qureshi",
+    "name": "Sana Qureshi",
+    "avatar": "/assets/images/authors/sana-qureshi.svg",
+    "bio": "Art historian and museum curator. Sana writes about the ideas hiding inside paintings, buildings, and everyday objects.",
+    "expertise": [
+      "Art & Culture",
+      "Design"
+    ],
+    "articleCount": 1,
+    "followers": 3432,
+    "social": {
+      "twitter": "https://twitter.com/sanaqureshi",
+      "linkedin": "https://linkedin.com/in/sana-qureshi",
+      "website": "https://sana-qureshi.dev"
+    },
+    "joined": "2022-03-01"
+  },
+  {
+    "id": "auth-11",
+    "slug": "ch-raja-siva-reddy",
+    "name": "Ch Raja Siva Reddy",
+    "avatar": "/assets/images/authors/ch-raja-siva-reddy.svg",
+    "bio": "Technology enthusiast and aspiring software developer, writing about the tools, ideas, and small projects shaping how the next generation builds software.",
+    "expertise": [
+      "Technology",
+      "Programming"
+    ],
+    "articleCount": 2,
+    "followers": 0,
+    "social": {
+      "twitter": "https://twitter.com/chrajasivareddy",
+      "linkedin": "https://linkedin.com/in/ch-raja-siva-reddy",
+      "website": "https://ch-raja-siva-reddy.dev"
+    },
+    "joined": "2022-03-01"
+  }
+]

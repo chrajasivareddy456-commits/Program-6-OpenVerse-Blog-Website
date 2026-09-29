@@ -1,0 +1,80 @@
+/* ==========================================================================
+   OpenVerse — Animations
+   ========================================================================== */
+
+@keyframes floaty {
+  0%   { transform: translateY(0) translateX(0); }
+  50%  { transform: translateY(-40px) translateX(12px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+@keyframes floaty-slow {
+  0%, 100% { transform: translateY(0) rotate(20deg); }
+  50% { transform: translateY(-18px) rotate(28deg); }
+}
+
+@keyframes floaty-card {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(-1.5deg); }
+}
+
+@keyframes book-float {
+  0%, 100% { transform: rotateX(48deg) rotateZ(-38deg) translateY(0); }
+  50% { transform: rotateX(46deg) rotateZ(-36deg) translateY(-16px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: 100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+.spinner {
+  width: 20px; height: 20px; border-radius: 50%;
+  border: 2px solid rgba(255,255,255,.25); border-top-color: #fff;
+  animation: spin .7s linear infinite;
+}
+.spinner-dark { border-color: rgba(139,92,246,.25); border-top-color: var(--purple); }
+
+@keyframes pulse-heart {
+  0% { transform: scale(1); }
+  35% { transform: scale(1.35); }
+  60% { transform: scale(.95); }
+  100% { transform: scale(1); }
+}
+.bookmark-pop { animation: pulse-heart .4s var(--ease); }
+
+@keyframes fade-in-page {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+body { animation: fade-in-page .5s ease; }
+
+@keyframes copy-check {
+  0% { transform: scale(.6); opacity: 0; }
+  50% { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+.copy-check-anim { animation: copy-check .35s var(--ease); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  html { scroll-behavior: auto; }
+}
